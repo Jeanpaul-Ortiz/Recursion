@@ -84,47 +84,50 @@ int sumDigits(const int num){
     else{return sumDigits(num / 10) + num % 10;}
 }
 
-/**
- * EXERCISE 5:
- * 
- * Reverse the digits of a given number recursively.
- * Example: 
- *      input = 12
- *      output = 21
- * Hint: If the integer number 123 is divided by 10, the quotient is 123 / 10 = 12, but the remainder is 123 % 10 = 3.
- * Hint: Use a helper function.
- * 
- */
+// /**
+//  * EXERCISE 5:
+//  * 
+//  * Reverse the digits of a given number recursively.
+//  * Example: 
+//  *      input = 12
+//  *      output = 21
+//  * Hint: If the integer number 123 is divided by 10, the quotient is 123 / 10 = 12, but the remainder is 123 % 10 = 3.
+//  * Hint: Use a helper function.
+//  * 
+//  */
 
-int reverseNumber(const int num){
-    if(num < 10){
-        return num;
-    }
-    else{ return reverseNumber(num/10) + pow(10, sizeof(num)) * num % 10;}
-}
+// // int reverseNumber(const int num){
+// //     if(num < 10){
+// //         return num;
+// //     }
+// //     else{ return reverseNumber(num/10) + pow(10, sizeof(num)) * num % 10;}
+// // }
 
-/*
-* EXERCISE 6:
-* 
-* Complete the isPalindrome() method. A string is a palindrome if it can be read 
-* the same way frontwards and backwards. 
+// /*
+// * EXERCISE 6:
+// * 
+// * Complete the isPalindrome() method. A string is a palindrome if it can be read 
+// * the same way frontwards and backwards. 
 
-* For example: "racecar" backwards is just "racecar".
-* Return true if the string is a palindrome, false otherwise.
+// * For example: "racecar" backwards is just "racecar".
+// * Return true if the string is a palindrome, false otherwise.
 
-* Hints:
-    * Is a string of size 1 a palindrome?
-    * What makes a string NOT a palindrome?
-    * str.substr( start_index, length) gives the substring of a string
+// * Hints:
+//     * Is a string of size 1 a palindrome?
+//     * What makes a string NOT a palindrome?
+//     * str.substr( start_index, length) gives the substring of a string
 
-* Assumptions:
-    * The string will not have any spaces
-    * The string will only contain alphanumeric characters (A-Z, a-z, 0-9)
-    * Lowercase letters are not the same as uppercase letters (racecar != Racecar)
-*/
+// * Assumptions:
+//     * The string will not have any spaces
+//     * The string will only contain alphanumeric characters (A-Z, a-z, 0-9)
+//     * Lowercase letters are not the same as uppercase letters (racecar != Racecar)
+// */
  
 bool isPalindrome(const string &str){
-    return true; // DUMMY RETURN
+    if(str.length() <= 1){
+        return true;
+    }else{return isPalindrome(str.substr(1,str.size() -2 ));}
+return false;
 }
 
 /**
@@ -136,24 +139,33 @@ bool isPalindrome(const string &str){
  * HINT: Use a helper function to complete the implementation, search always starts in index 0.
  */
 
+int findIndexHelper(vector <string> v, string target, int i){
+    if(v.size() < i){return -1;}
+    if(v[i] == target){
+        return i;
+    }
+    return findIndexHelper(v, target, i + 1);
+}
 static int findIndex(vector<string> v, string target){
-    return -2;
+    
+    return findIndexHelper(v, target, 0);
 }
 
-/**
- * EXERCISE 8:
- *
- *
- * Complete the findMax() method. This method receives a vector of positive
- * integers, and should return the max value present in the vector.
- * If the vector is empty, return -1
- *
- * NOTE: You must use recursion. Iterative methods will fail test cases.
- *
- * Hint:
- * What is the max value of a vector of size 1?
- * You might want to define a helper method <img class="icon emoticon" alt="sonrisa" title="sonrisa" src="https://online.upr.edu/theme/image.php/fordson/core/1659460725/s/smiley" />
- */
+// /**
+//  * EXERCISE 8:
+//  *
+//  *
+//  * Complete the findMax() method. This method receives a vector of positive
+//  * integers, and should return the max value present in the vector.
+//  * If the vector is empty, return -1
+//  *
+//  * NOTE: You must use recursion. Iterative methods will fail test cases.
+//  *
+//  * Hint:
+//  * What is the max value of a vector of size 1?
+//  * You might want to define a helper method <img class="icon emoticon" alt="sonrisa" title="sonrisa" src="https://online.upr.edu/theme/image.php/fordson/core/1659460725/s/smiley" />
+//  *
+int findMaxHelper(vector<int> n)
 int findMax(vector<int> nums){
     return -1; // DUMMY RETURN
 }
@@ -200,12 +212,12 @@ int main(){
     cout << "\n";
 
     //test Exercise 5
-    cout << "Exercise 5" << endl;
-    cout << "Reverse of 8721: " << reverseNumber(8721) << endl;
-    cout << "Reverse of 12: " << reverseNumber(12) << endl;
-    cout << "Reverse of -1: " << reverseNumber(-1) << endl;
-    cout << "Reverse of 987654321: " << reverseNumber(987654321) << endl;
-    cout << "\n";
+    // cout << "Exercise 5" << endl;
+    // cout << "Reverse of 8721: " << reverseNumber(8721) << endl;
+    // cout << "Reverse of 12: " << reverseNumber(12) << endl;
+    // cout << "Reverse of -1: " << reverseNumber(-1) << endl;
+    // cout << "Reverse of 987654321: " << reverseNumber(987654321) << endl;
+    // cout << "\n";
 
     // test Exercise 6
     cout << "Exercise 6" << endl;
@@ -216,26 +228,26 @@ int main(){
     cout << "\n";
 
     // test Exercise 7
-    cout << "Exercise 7" << endl;
-    vector<string> v{"Cpp", "Is", "The", "Best"};
-    string target = "The";
-    cout << "Index of \"The\"? " << findIndex(v, target) << endl;
+//     cout << "Exercise 7" << endl;
+//     vector<string> v{"Cpp", "Is", "The", "Best"};
+//     string target = "The";
+//     cout << "Index of \"The\"? " << findIndex(v, target) << endl;
 
-    v = {"Java", "Has", "No", "Pointers", "Though"};
-    target = "What about Python?";
-    cout << "Index of \"What about Python?\" ? " << findIndex(v, target) << endl;
-    cout << "\n";
+//     v = {"Java", "Has", "No", "Pointers", "Though"};
+//     target = "What about Python?";
+//     cout << "Index of \"What about Python?\" ? " << findIndex(v, target) << endl;
+//     cout << "\n";
 
-    // test Exercise 8
-    cout << "Exercise 8" << endl;
-    vector<int> v1{1, 2, 3, 4, 5};      // 5: End
-    vector<int> v2{8, 9, 10, 6, 7};     // 10: Middle
-    vector<int> v3{15, 14, 13, 12, 11}; // 15: Start
+//     // test Exercise 8
+//     cout << "Exercise 8" << endl;
+//     vector<int> v1{1, 2, 3, 4, 5};      // 5: End
+//     vector<int> v2{8, 9, 10, 6, 7};     // 10: Middle
+//     vector<int> v3{15, 14, 13, 12, 11}; // 15: Start
 
-    cout << "Max of v1: " << findMax(v1) << endl;
-    cout << "Max of v2: " << findMax(v2) << endl;
-    cout << "Max of v3: " << findMax(v3) << endl;
-    cout << "\n";
+//     cout << "Max of v1: " << findMax(v1) << endl;
+//     cout << "Max of v2: " << findMax(v2) << endl;
+//     cout << "Max of v3: " << findMax(v3) << endl;
+//     cout << "\n";
 }
 
 
